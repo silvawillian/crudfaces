@@ -15,7 +15,9 @@ import java.util.Map;
  */
 public class UserDAO extends GenericDAO<User> {
     
-    public UserDAO() {
+	private static final long serialVersionUID = 1L;
+
+	public UserDAO() {
         super(User.class);
     }
     

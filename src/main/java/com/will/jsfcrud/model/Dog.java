@@ -58,8 +58,6 @@ public class Dog implements Serializable {
         this.persons = persons;
     }
     
-    
-    
     @Override
     public int hashCode() {
         return id;
