@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
+<?xml version="1.0"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>CRUD JSF</display-name>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -11,14 +10,44 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>/pages/protected/index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+ 
+    <filter>
+        <filter-name>LoginCheckFilter</filter-name>
+        <filter-class>com.filter.LoginCheckFilter</filter-class>
+        <init-param>
+            <param-name>loginActionURI</param-name>
+            <param-value>/JSFCrud/pages/public/login.xhtml</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginCheckFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+ 
+    <filter>
+        <filter-name>AdminPagesFilter</filter-name>
+        <filter-class>com.filter.AdminPagesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminPagesFilter</filter-name>
+        <url-pattern>/pages/protected/admin/*</url-pattern>
+    </filter-mapping>
+ 
+    <filter>
+        <filter-name>DefaultUserPagesFilter</filter-name>
+        <filter-class>com.filter.DefaultUserPagesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DefaultUserPagesFilter</filter-name>
+        <url-pattern>/pages/protected/defaultUser/*</url-pattern>
+    </filter-mapping> 
 </web-app>
